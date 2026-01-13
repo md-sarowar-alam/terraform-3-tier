@@ -1,0 +1,67 @@
+# Terraform Configuration Example
+# Copy this file to terraform.tfvars and fill in your values
+
+################################################################################
+# AWS Configuration
+################################################################################
+aws_region  = "us-east-1"
+aws_profile = "default"  # Change to your AWS CLI profile name
+
+################################################################################
+# Project Configuration
+################################################################################
+project_name = "bmi-health-tracker"
+environment  = "dev"
+owner        = "DevOps Team"
+
+################################################################################
+# Backend Configuration (S3)
+################################################################################
+# Note: Backend is configured via terraform init command
+# Create the S3 bucket manually before running terraform init:
+# aws s3 mb s3://your-terraform-state-bucket --profile your-profile
+#
+# Then initialize Terraform with:
+# terraform init \
+#   -backend-config="bucket=your-terraform-state-bucket" \
+#   -backend-config="key=bmi-health-tracker/terraform.tfstate" \
+#   -backend-config="region=us-east-1" \
+#   -backend-config="profile=your-aws-profile"
+
+################################################################################
+# Network Configuration
+################################################################################
+vpc_cidr             = "10.0.0.0/16"
+public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
+# availability_zones = ["us-east-1a", "us-east-1b"]  # Optional: will auto-detect if not specified
+
+################################################################################
+# EC2 Configuration
+################################################################################
+instance_type    = "t3.medium"  # t3.medium recommended (2 vCPU, 4GB RAM)
+key_pair_name    = "your-key-pair-name"  # REQUIRED: Your EC2 key pair name
+root_volume_size = 30
+root_volume_type = "gp3"
+
+# ami_id = ""  # Leave empty to auto-detect latest Ubuntu 22.04 LTS
+
+################################################################################
+# Database Configuration
+################################################################################
+db_name     = "bmidb"
+db_user     = "bmi_user"
+db_password = "YourSecurePasswordHere123!"  # CHANGE THIS! Use a strong password
+
+################################################################################
+# Security Configuration
+################################################################################
+# WARNING: Restrict these CIDR blocks in production!
+allowed_ssh_cidr  = ["0.0.0.0/0"]  # Allow SSH from anywhere (restrict this!)
+allowed_http_cidr = ["0.0.0.0/0"]  # Allow HTTP from anywhere
+
+################################################################################
+# Application Configuration
+################################################################################
+enable_detailed_monitoring = false
+associate_public_ip        = true
+enable_auto_deployment     = true  # Automatically deploy app on instance launch
