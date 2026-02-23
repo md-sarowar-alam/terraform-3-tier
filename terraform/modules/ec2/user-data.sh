@@ -126,32 +126,33 @@ echo "[SUCCESS] Node.js environment configured"
 
 echo "[INFO] Setting up application directory..."
 
-# Create app directory structure
-mkdir -p $APP_DIR
-chown -R ubuntu:ubuntu $APP_DIR
+# Clone application from GitHub repository
+GIT_REPO="https://github.com/md-sarowar-alam/terraform-3-tier.git"
 
-# Copy application files from the root (they should be uploaded separately)
-# For now, we'll create a placeholder that assumes files are in /tmp or need to be git cloned
+if [ -d "$APP_DIR/.git" ]; then
+    echo "[INFO] Repository already exists, pulling latest changes..."
+    sudo -u ubuntu bash -c "cd $APP_DIR && git pull"
+else
+    echo "[INFO] Cloning application from GitHub: $GIT_REPO"
+    sudo -u ubuntu git clone $GIT_REPO $APP_DIR
+    
+    if [ $? -eq 0 ]; then
+        echo "[SUCCESS] Application cloned successfully"
+        chown -R ubuntu:ubuntu $APP_DIR
+    else
+        echo "[ERROR] Failed to clone repository"
+        echo "[WARNING] Manual deployment will be required"
+    fi
+fi
 
-# Option 1: If you upload files with Terraform file provisioner or via S3
-# if [ -d "/tmp/bmi-health-tracker" ]; then
-#     cp -r /tmp/bmi-health-tracker/* $APP_DIR/
-# fi
-
-# Option 2: Clone from git repository (recommended)
-# Uncomment and modify if you have a git repository
-# sudo -u ubuntu git clone https://github.com/yourusername/bmi-health-tracker.git $APP_DIR
-
-# Option 3: For this setup, we'll create the structure based on the existing files
-# This assumes you'll upload the files separately or use a different method
-
-# For this demo, let's assume files are already in place or create a flag file
-echo "[WARNING] Application files need to be uploaded to $APP_DIR"
-echo "[INFO] Please ensure the following structure exists in $APP_DIR:"
-echo "  - backend/ (with package.json, src/, migrations/)"
-echo "  - frontend/ (with package.json, src/, vite.config.js)"
-echo "  - database/ (with setup-database.sh)"
-echo "  - IMPLEMENTATION_AUTO.sh"
+# Make deployment script executable
+if [ -f "$DEPLOY_SCRIPT" ]; then
+    chmod +x $DEPLOY_SCRIPT
+    chown ubuntu:ubuntu $DEPLOY_SCRIPT
+    echo "[SUCCESS] Deployment script found and made executable"
+else
+    echo "[WARNING] Deployment script not found at $DEPLOY_SCRIPT"
+fi
 
 ################################################################################
 # Check if deployment script exists
