@@ -34,14 +34,6 @@ APP_DIR="/home/ubuntu/bmi-health-tracker"
 DEPLOY_SCRIPT="$APP_DIR/IMPLEMENTATION_AUTO.sh"
 
 ################################################################################
-# Wait for cloud-init to finish
-################################################################################
-
-echo "[INFO] Waiting for cloud-init to complete..."
-cloud-init status --wait
-echo "[SUCCESS] Cloud-init completed"
-
-################################################################################
 # System Updates
 ################################################################################
 
