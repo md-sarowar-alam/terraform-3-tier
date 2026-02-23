@@ -299,8 +299,9 @@ Your Terraform codebase is **complete and ready to deploy**! The infrastructure 
 
 ---
 
-**Created**: January 2026  
-**Terraform Version**: >= 1.0  
-**AWS Provider**: ~> 5.0  
-**Target OS**: Ubuntu 22.04 LTS  
-**Status**: ✅ Ready for Production
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/

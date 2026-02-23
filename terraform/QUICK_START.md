@@ -180,3 +180,12 @@ terraform destroy
 1. Check full [README.md](README.md) for detailed documentation
 2. View logs: `sudo tail -f /var/log/user-data.log`
 3. Check service status: `sudo systemctl status bmi-backend nginx postgresql`
+
+---
+
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/

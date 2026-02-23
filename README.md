@@ -591,7 +591,9 @@ For issues or questions:
 
 ---
 
-**Created by**: DevOps Team  
-**Last Updated**: January 2026  
-**Terraform Version**: >= 1.0  
-**AWS Provider Version**: ~> 5.0
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/

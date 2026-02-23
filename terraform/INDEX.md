@@ -243,8 +243,13 @@ sudo tail -f /var/log/nginx/bmi-error.log # Nginx
 
 ---
 
-**Created**: January 2026  
-**Status**: ✅ Complete & Production Ready  
-**Version**: 1.0.0
-
 **Start Here**: → [QUICK_START.md](QUICK_START.md) 🚀
+
+---
+
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/

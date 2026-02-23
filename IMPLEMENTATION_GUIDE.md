@@ -782,6 +782,11 @@ cd /home/ubuntu/bmi-health-tracker
 
 **🎉 Congratulations! You've successfully deployed a 3-tier application on AWS using Terraform!**
 
-**Created**: January 2026  
-**Version**: 1.0  
-**For**: Ostad Batch-08 Module-06
+---
+
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/

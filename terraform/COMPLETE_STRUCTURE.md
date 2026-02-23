@@ -485,3 +485,12 @@ Your deployment is successful when:
 ---
 
 **Ready to deploy? Start with**: [QUICK_START.md](QUICK_START.md) 🚀
+
+---
+
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/

@@ -281,6 +281,9 @@ terraform/
 
 ---
 
-**Architecture Version**: 1.0  
-**Last Updated**: January 2026  
-**Status**: Production Ready for Single Instance Deployment
+## 🧑‍💻 Author
+
+*Md. Sarowar Alam*  
+Lead DevOps Engineer, Hogarth Worldwide  
+📧 Email: sarowar@hotmail.com  
+🔗 LinkedIn: https://www.linkedin.com/in/sarowar/
