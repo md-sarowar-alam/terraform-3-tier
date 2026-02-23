@@ -165,34 +165,26 @@ if [ "$ENABLE_AUTO_DEPLOYMENT" = "true" ]; then
         
         # Make script executable
         chmod +x $DEPLOY_SCRIPT
+        chown ubuntu:ubuntu $DEPLOY_SCRIPT
         
-        # Create database credentials file for non-interactive deployment
-        sudo -u ubuntu bash <<EOFDB
-set -e
-cd $APP_DIR
-
-# Run deployment script with database credentials
-export DB_NAME="$DB_NAME"
-export DB_USER="$DB_USER"
-export DB_PASSWORD="$DB_PASSWORD"
-
-# Run the deployment script non-interactively
-# We'll need to modify the script to accept environment variables
-# For now, create an expect script or use heredoc
-
-cat > /tmp/deploy_answers.txt <<EOF
-$DB_NAME
-$DB_USER
-$DB_PASSWORD
-$DB_PASSWORD
-y
-EOF
-
-echo "[INFO] Running deployment script..."
-# Run with answers piped in (you may need to modify IMPLEMENTATION_AUTO.sh to accept env vars)
-# For now, just note that manual deployment may be needed
-
-EOFDB
+        # Run deployment script as ubuntu user with database credentials
+        echo "[INFO] Running deployment script non-interactively..."
+        sudo -u ubuntu bash -c "
+            set -e
+            cd $APP_DIR
+            
+            # Export database credentials for non-interactive deployment
+            export DB_NAME='$DB_NAME'
+            export DB_USER='$DB_USER'
+            export DB_PASSWORD='$DB_PASSWORD'
+            export AUTO_CONFIRM='yes'
+            
+            # Run the deployment script
+            echo '[INFO] Starting IMPLEMENTATION_AUTO.sh...'
+            bash $DEPLOY_SCRIPT 2>&1 | tee -a /var/log/user-data.log
+            
+            echo '[SUCCESS] Deployment script completed'
+        "
         
         echo "[SUCCESS] Deployment script executed"
         echo "[INFO] Check /var/log/user-data.log for details"
@@ -202,12 +194,18 @@ EOFDB
         echo ""
         echo "To deploy manually, SSH into the instance and run:"
         echo "  cd $APP_DIR"
+        echo "  export DB_NAME='$DB_NAME'"
+        echo "  export DB_USER='$DB_USER'"
+        echo "  export DB_PASSWORD='$DB_PASSWORD'"
         echo "  ./IMPLEMENTATION_AUTO.sh"
     fi
 else
     echo "[INFO] Auto-deployment is disabled"
     echo "[INFO] To deploy manually, SSH into the instance and run:"
     echo "  cd $APP_DIR"
+    echo "  export DB_NAME='$DB_NAME'"
+    echo "  export DB_USER='$DB_USER'"
+    echo "  export DB_PASSWORD='$DB_PASSWORD'"
     echo "  ./IMPLEMENTATION_AUTO.sh"
 fi
 

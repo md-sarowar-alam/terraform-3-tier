@@ -128,6 +128,20 @@ get_ec2_public_ip() {
 collect_database_credentials() {
     print_header "Database Configuration"
     
+    # Check if credentials are provided via environment variables (non-interactive mode)
+    if [ -n "$DB_NAME" ] && [ -n "$DB_USER" ] && [ -n "$DB_PASSWORD" ]; then
+        print_info "Using database credentials from environment variables"
+        print_success "Database credentials loaded"
+        echo ""
+        echo "Database Name: $DB_NAME"
+        echo "Database User: $DB_USER"
+        echo "Database Host: $DB_HOST"
+        echo "Database Port: $DB_PORT"
+        echo ""
+        return
+    fi
+    
+    # Interactive mode: prompt for credentials
     echo "Please provide database credentials for the BMI Health Tracker"
     echo ""
     
@@ -918,11 +932,16 @@ main() {
     [ "$FRESH_DEPLOY" = true ] && echo "  - Fresh deployment (clean install)"
     echo ""
     
-    read -p "Continue with deployment? (y/n): " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        print_error "Deployment cancelled"
-        exit 1
+    # Check if running in non-interactive mode (auto-confirmation)
+    if [ "$AUTO_CONFIRM" != "yes" ]; then
+        read -p "Continue with deployment? (y/n): " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            print_error "Deployment cancelled"
+            exit 1
+        fi
+    else
+        print_info "Running in non-interactive mode (auto-confirmed)"
     fi
     
     # Run deployment steps
