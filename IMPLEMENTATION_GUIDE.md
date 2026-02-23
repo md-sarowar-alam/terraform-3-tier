@@ -60,7 +60,7 @@ aws sts get-caller-identity --profile sarowar-ostad
 
 **Check existing key pairs:**
 ```powershell
-aws ec2 describe-key-pairs --profile sarowar-ostad --region us-east-1 --query 'KeyPairs[*].KeyName' --output table
+aws ec2 describe-key-pairs --profile sarowar-ostad --region ap-south-1 --query 'KeyPairs[*].KeyName' --output table
 ```
 
 **Option A: Use existing key**
@@ -73,7 +73,7 @@ aws ec2 describe-key-pairs --profile sarowar-ostad --region us-east-1 --query 'K
 aws ec2 create-key-pair `
   --key-name bmi-health-tracker-key `
   --profile sarowar-ostad `
-  --region us-east-1 `
+  --region ap-south-1 `
   --query 'KeyMaterial' `
   --output text | Out-File -Encoding ascii -FilePath $env:USERPROFILE\.ssh\bmi-health-tracker-key.pem
 
@@ -93,7 +93,7 @@ Test-Path $env:USERPROFILE\.ssh\bmi-health-tracker-key.pem
 $BUCKET_NAME = "terraform-state-sarowar-bmi-2026"
 
 # Create bucket
-aws s3 mb s3://$BUCKET_NAME --profile sarowar-ostad --region us-east-1
+aws s3 mb s3://$BUCKET_NAME --profile sarowar-ostad --region ap-south-1
 
 # Enable versioning (important for state history)
 aws s3api put-bucket-versioning `
@@ -163,7 +163,7 @@ allowed_ssh_cidr = ["203.0.113.25/32"]  # Use YOUR IP from Step 4
 **Optional changes:**
 ```hcl
 # Change region if needed
-aws_region = "us-east-1"
+aws_region = "ap-south-1"
 
 # Use smaller/larger instance
 instance_type = "t3.medium"  # or "t3.small" (cheaper) or "t3.large" (more power)
@@ -190,7 +190,7 @@ cd terraform
 terraform init `
   -backend-config="bucket=terraform-state-sarowar-bmi-2026" `
   -backend-config="key=bmi-health-tracker/terraform.tfstate" `
-  -backend-config="region=us-east-1" `
+  -backend-config="region=ap-south-1" `
   -backend-config="profile=sarowar-ostad"
 ```
 
@@ -336,7 +336,7 @@ The EC2 instance is now running, but it's installing software automatically (use
 aws ec2 describe-instance-status `
   --instance-ids $(terraform output -raw instance_id) `
   --profile sarowar-ostad `
-  --region us-east-1 `
+  --region ap-south-1 `
   --query 'InstanceStatuses[0].InstanceStatus.Status' `
   --output text
 
@@ -664,14 +664,14 @@ sudo systemctl restart bmi-backend
 **Error: "InvalidKeyPair.NotFound"**
 ```powershell
 # Key pair doesn't exist - check name is correct
-aws ec2 describe-key-pairs --profile sarowar-ostad --region us-east-1
+aws ec2 describe-key-pairs --profile sarowar-ostad --region ap-south-1
 # Update key_pair_name in terraform.tfvars
 ```
 
 **Error: "VpcLimitExceeded"**
 ```powershell
 # Delete unused VPCs or request limit increase
-aws ec2 describe-vpcs --profile sarowar-ostad --region us-east-1
+aws ec2 describe-vpcs --profile sarowar-ostad --region ap-south-1
 ```
 
 ---

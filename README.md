@@ -33,10 +33,10 @@ Complete guide to deploy the 3-tier BMI Health Tracker application on AWS EC2 us
 
 ```powershell
 # Check existing key pairs
-aws ec2 describe-key-pairs --profile sarowar-ostad --region us-east-1 --query 'KeyPairs[*].KeyName'
+aws ec2 describe-key-pairs --profile sarowar-ostad --region ap-south-1 --query 'KeyPairs[*].KeyName'
 
 # Create new key pair (if needed)
-aws ec2 create-key-pair --key-name bmi-health-tracker-key --profile sarowar-ostad --region us-east-1 --query 'KeyMaterial' --output text | Out-File -Encoding ascii -FilePath $env:USERPROFILE\.ssh\bmi-health-tracker-key.pem
+aws ec2 create-key-pair --key-name bmi-health-tracker-key --profile sarowar-ostad --region ap-south-1 --query 'KeyMaterial' --output text | Out-File -Encoding ascii -FilePath $env:USERPROFILE\.ssh\bmi-health-tracker-key.pem
 ```
 
 ### Step 2: Create S3 Bucket for State
@@ -46,7 +46,7 @@ aws ec2 create-key-pair --key-name bmi-health-tracker-key --profile sarowar-osta
 $BUCKET_NAME = "terraform-state-sarowar-bmi-tracker"
 
 # Create bucket
-aws s3 mb s3://$BUCKET_NAME --profile sarowar-ostad --region us-east-1
+aws s3 mb s3://$BUCKET_NAME --profile sarowar-ostad --region ap-south-1
 
 # Enable versioning
 aws s3api put-bucket-versioning --bucket $BUCKET_NAME --versioning-configuration Status=Enabled --profile sarowar-ostad
@@ -73,7 +73,7 @@ cd terraform
 terraform init `
   -backend-config="bucket=$BUCKET_NAME" `
   -backend-config="key=bmi-health-tracker/terraform.tfstate" `
-  -backend-config="region=us-east-1" `
+  -backend-config="region=ap-south-1" `
   -backend-config="profile=sarowar-ostad"
 
 # Review what will be created
@@ -210,7 +210,7 @@ Create an S3 bucket for Terraform state storage:
 export AWS_PROFILE=your-profile-name
 
 # Create S3 bucket (replace with your unique name)
-aws s3 mb s3://your-terraform-state-bucket-name --region us-east-1
+aws s3 mb s3://your-terraform-state-bucket-name --region ap-south-1
 
 # Enable versioning (recommended for state history)
 aws s3api put-bucket-versioning \
@@ -264,7 +264,7 @@ nano terraform.tfvars
 
 ```hcl
 # AWS Configuration
-aws_region  = "us-east-1"
+aws_region  = "ap-south-1"
 aws_profile = "your-aws-profile-name"
 
 # S3 Backend
@@ -291,7 +291,7 @@ cd terraform/
 terraform init \
   -backend-config="bucket=your-terraform-state-bucket" \
   -backend-config="key=bmi-health-tracker/terraform.tfstate" \
-  -backend-config="region=us-east-1" \
+  -backend-config="region=ap-south-1" \
   -backend-config="profile=your-aws-profile"
 ```
 
@@ -469,7 +469,7 @@ aws s3 ls s3://your-terraform-state-bucket --profile your-profile
 terraform init -reconfigure \
   -backend-config="bucket=your-terraform-state-bucket" \
   -backend-config="key=bmi-health-tracker/terraform.tfstate" \
-  -backend-config="region=us-east-1" \
+  -backend-config="region=ap-south-1" \
   -backend-config="profile=your-aws-profile"
 ```
 
