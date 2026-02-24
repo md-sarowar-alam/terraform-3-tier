@@ -298,10 +298,9 @@ Your Terraform codebase is **complete and ready to deploy**! The infrastructure 
 **Estimated deployment time**: 5-10 minutes for infrastructure + 10-15 minutes for application = **~20 minutes total** from start to working application!
 
 ---
-
 ## 🧑‍💻 Author
-
 *Md. Sarowar Alam*  
 Lead DevOps Engineer, Hogarth Worldwide  
 📧 Email: sarowar@hotmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/sarowar/
+---

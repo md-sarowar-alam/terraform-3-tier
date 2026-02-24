@@ -182,10 +182,9 @@ terraform destroy
 3. Check service status: `sudo systemctl status bmi-backend nginx postgresql`
 
 ---
-
 ## 🧑‍💻 Author
-
 *Md. Sarowar Alam*  
 Lead DevOps Engineer, Hogarth Worldwide  
 📧 Email: sarowar@hotmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/sarowar/
+---

@@ -246,10 +246,9 @@ sudo tail -f /var/log/nginx/bmi-error.log # Nginx
 **Start Here**: → [QUICK_START.md](QUICK_START.md) 🚀
 
 ---
-
 ## 🧑‍💻 Author
-
 *Md. Sarowar Alam*  
 Lead DevOps Engineer, Hogarth Worldwide  
 📧 Email: sarowar@hotmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/sarowar/
+---

@@ -783,10 +783,9 @@ cd /home/ubuntu/bmi-health-tracker
 **🎉 Congratulations! You've successfully deployed a 3-tier application on AWS using Terraform!**
 
 ---
-
 ## 🧑‍💻 Author
-
 *Md. Sarowar Alam*  
 Lead DevOps Engineer, Hogarth Worldwide  
 📧 Email: sarowar@hotmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/sarowar/
+---

@@ -221,10 +221,9 @@ terraform output
 
 Your Terraform configuration is now clean and ready to use! 🚀
 ---
-
 ## 🧑‍💻 Author
-
 *Md. Sarowar Alam*  
 Lead DevOps Engineer, Hogarth Worldwide  
 📧 Email: sarowar@hotmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/sarowar/
+---
